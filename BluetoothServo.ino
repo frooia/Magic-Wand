@@ -54,7 +54,7 @@ void setup() {
   Serial.println("4- Go to CUSTOM CHARACTERISTIC in CUSTOM SERVICE and write something");
   Serial.println("5- See the magic =)");
 
-  BLEDevice::init("TiffservoESP32");
+  BLEDevice::init("servoESP32");
   BLEServer *pServer = BLEDevice::createServer();
 
   BLEService *pService = pServer->createService(SERVICE_UUID);
