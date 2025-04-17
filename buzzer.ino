@@ -61,32 +61,32 @@ class MyCallbacks : public BLECharacteristicCallbacks {
       for (int i = 0; i < value.length(); i++) {
         Serial.print(value[i]);
       }
-
-      Serial.println();
-      digitalWrite(26, HIGH);
-      //tone(26, 261);
-      for (int thisNote = 0; thisNote < notes * 2; thisNote = thisNote + 2) {
-
-    // calculates the duration of each note
-    divider = melody[thisNote + 1];
-    if (divider > 0) {
-      // regular note, just proceed
-      noteDuration = (wholenote) / divider;
-    } else if (divider < 0) {
-      // dotted notes are represented with negative durations!!
-      noteDuration = (wholenote) / abs(divider);
-      noteDuration *= 1.5; // increases the duration in half for dotted notes
-    }
-    // we only play the note for 90% of the duration, leaving 10% as a pause
-    tone(26, melody[thisNote], noteDuration*0.9);
-    // Wait for the specief duration before playing the next note.
-    delay(noteDuration);
-    // stop the waveform generation before the next note.
-    noTone(26);
-  }
-      delay(1000);
-      noTone(26);
       Serial.println("*********");
+      if (value == "2") {
+        digitalWrite(26, HIGH);
+        //tone(26, 261);
+        for (int thisNote = 0; thisNote < notes * 2; thisNote = thisNote + 2) {
+          // calculates the duration of each note
+          divider = melody[thisNote + 1];
+          if (divider > 0) {
+            // regular note, just proceed
+            noteDuration = (wholenote) / divider;
+          } else if (divider < 0) {
+            // dotted notes are represented with negative durations!!
+            noteDuration = (wholenote) / abs(divider);
+            noteDuration *= 1.5; // increases the duration in half for dotted notes
+          }
+          // we only play the note for 90% of the duration, leaving 10% as a pause
+          tone(26, melody[thisNote], noteDuration*0.9);
+          // Wait for the specief duration before playing the next note.
+          delay(noteDuration);
+          // stop the waveform generation before the next note.
+          noTone(26);
+        }
+        delay(1000);
+        noTone(26);
+        Serial.println("*********");
+      }
     }
   }
 };
